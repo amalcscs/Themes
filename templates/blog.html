@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ============== BLOG SECTION ================-->
+
+<section class="blog_section section">
+    <div class="blog_container container grid">
+        <div class="blog_containerLeft grid">
+            <div class="blog_contentBox">
+                <p> June 16, 2023</p>
+                <h1>June 16, 2023 Nicepage 5.12: Payment Button. Payments Via PayPal</h1>
+                <p>We are happy to release the new update of Nicepage 5.12 with payments via PayPal, rotation by custom angles, Home Page improvements, and more.</p>
+                <div class="blog_imgBox">
+                    <img src="{% static 'img/payments-via-paypal.jpg' %}" alt="#">
+                </div>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog_contentBox">
+                <p> June 16, 2023</p>
+                <h1>June 16, 2023 Nicepage 5.12: Payment Button. Payments Via PayPal</h1>
+                <p>We are happy to release the new update of Nicepage 5.12 with payments via PayPal, rotation by custom angles, Home Page improvements, and more.</p>
+                <div class="blog_imgBox">
+                    <img src="{% static 'img/payments-via-paypal.jpg' %}" alt="#">
+                </div>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+
+        <div class="blog_containerRight">
+            <div class="blog_contentBox">
+                <p> June 16, 2023</p>
+                <h1>June 16, 2023 Nicepage 5.12: Payment Button. Payments Via PayPal</h1>
+                <p>We are happy to release the new update of Nicepage 5.12 with payments via PayPal, rotation by custom angles, Home Page improvements, and more.</p>
+                
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+
+<style>
+    .blog_section
+    {
+       
+        background:#ffff ;
+        padding: 8rem 1rem;
+    }
+    .blog_container
+    {
+        grid-template-columns:2.5fr 1.5fr; 
+        gap: 1.5rem;
+    }
+    .blog_containerLeft
+    {
+        grid-template-columns: repeat(1,1fr);
+        gap: 1.5rem;
+    }
+    .blog_contentBox
+    {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        padding: 2rem 1.75rem;
+    }
+    .blog_contentBox h1{
+        font-family: "Roboto", "Arial","sans-serif";
+        margin-bottom: 1.25rem;
+        font-weight: 500;
+        line-height: 1.9rem;
+        letter-spacing: 0.06rem;
+    }
+    .blog_contentBox p, .blog_contentBox a{
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin-bottom: 1rem;
+        line-height: 1.5rem;
+    }
+    .blog_imgBox
+    {
+        height: 500px;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    .blog_imgBox img{
+        width: 100%;
+        height: 100%;
+    }
+    .blog_contentBox a
+    {
+        margin-top: 2rem;
+        font-size: 0.95rem;
+        text-decoration: underline;
+    }
+    @media(max-width:575px)
+    {
+    .blog_section
+    {
+       
+        background:#ffff ;
+        padding: 5rem 1rem;
+    }
+        .blog_container
+        {
+        grid-template-columns:repeat(1,1fr); 
+        gap: 1.6rem;
+        }
+        .blog_imgBox
+        {
+            height: 250px;
+        }
+    }
+</style>
+
+
+{% endblock %}

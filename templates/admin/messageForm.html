@@ -1,0 +1,128 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .mailBox
+    {
+        color: rgb(96, 95, 95);
+    }
+    .mail__imgbox
+    {
+        width: 25px;
+        height: 25px;
+    }
+    .mail__imgbox img{
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+    }
+    .top_meassageBox
+    {
+        padding: 0.50rem;
+        font-size: 0.90rem;
+    }
+    .top_meassageBox h5{
+        font-size: 0.90rem; 
+        font-weight: 800;
+    }
+    .top_meassageBox p{
+        margin-top: 1rem;
+    }
+    .top_meassage span{
+        margin-right: 0.30rem;
+    }
+    .mrr
+    {
+        margin-right: 0.20rem;
+    }
+    .hide_message
+    {
+        display:none;
+    }
+      .visible_message {
+        display: block;
+      }
+ 
+    .message-paragraph
+    {
+        padding: 1rem 0rem;
+    }
+    .send-date
+    {
+        font-size: 0.80rem;
+        font-weight: 700;
+        color: #999898;
+    }
+    .delete
+    {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+       
+    }
+    .delete a{
+        background: #e01b1b;
+        padding:0.15rem 0.30rem;
+       
+    }
+    .delete a:hover{
+        background: #bc1111;
+       
+    }
+    .delete .bi-x
+    {
+        color:#ffffff ;
+    }
+    .bi-envelope-at-fill,  .bi-telephone-fill 
+    {
+        font-size: 0.90rem;      
+    }
+</style>
+
+    <div class="row">
+    {% for msgs in user_all_message %}
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card mailBox" >
+            <span class="delete"><a href="{% url 'message_remove' msgs.id %}"><i class="bi bi-x"></i></a></span>
+            <div class="row p-2" onclick="toggleDiv({{ msgs.id }})">
+                <div class="col-sm-2 col-md-2 col-lg-2" >
+                    <div class="mail__imgbox">
+                        <img src="{% static 'img/message.png' %}" alt="Dummy Message image">
+                       
+                    </div>
+                
+                </div>
+                <div class="col-sm-10 col-md-10 col-lg-10 top_meassageBox" >
+                    <div class="top_meassage">
+                        <h5>{{msgs.name}}</h5>
+                        <span><i class="bi bi-envelope-at-fill mrr"></i> {{msgs.email}}</span><br>
+                        <span><i class="bi bi-telephone-fill mrr"></i> {{msgs.contact_no}}</span>
+                        
+                    </div>
+                    <div class=" message-paragraph hide_message" id="message{{msgs.id}}" >
+                        <i class="bi bi-chat-dots-fill mrr"></i>
+                        <p > {{msgs.messages}}</p>
+                        <span class="send-date">{{msgs.connect_date}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+
+    <script>
+        function toggleDiv(itemId) {
+            var div = document.getElementById('message' + itemId);
+            div.classList.toggle('hide_message');
+            div.classList.toggle('visible_message');
+          }
+    
+
+    </script>
+  
+ 
+
+{% endblock %}

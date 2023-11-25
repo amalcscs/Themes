@@ -1,0 +1,907 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+body {
+    background-color: #14101d;
+    background-image: radial-gradient( circle, rgba(  0, 0, 0, 0 ) 0%, rgba( 0, 0, 0, 0.8 ) 100% );
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+ }
+ .category-top
+ {
+    grid-template-columns: 1.2fr 1.6fr;
+    justify-content: flex-start;
+    padding: 3rem 0.50rem;
+    gap: 1.5rem;
+    background-color:rgba(0, 0, 0, 0.5);
+ }
+ .category-leftBox 
+ {
+    padding-left: 0.50rem;
+ }
+ .categry_imgBox
+ {
+    width: 550px;
+    height: 350px;
+    padding: 0.80rem;
+ }
+ .categry_imgBox img{
+    width: 100%;
+    height: 100%;
+ }
+ .category-rightBox
+ {
+    padding: 0.80rem;
+ }
+ .category-head
+ {
+    margin-bottom: 1.5rem;
+    font-size:2.5rem;
+    letter-spacing: 0.07rem;
+    font-weight: 700;
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+ .category-right-content p
+ {
+    font-size: 0.94rem;
+    color: rgb(209, 209, 209);
+    letter-spacing: 0.07rem;
+    font-weight: 300;
+    line-height: 1.8rem;
+ }
+
+  /*--  Category Features Section ---- */
+
+ .category-feature-section
+ {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 1.5rem;
+    border-top: 2px solid #fbb913;
+    margin-top: 2rem;
+ }
+ .category-fs-leftBox
+ {
+  padding-right: 1rem;
+ }
+ .category-fs-rightBox
+ {
+    margin-top: 10rem;
+    padding-left: 2rem;
+ }
+ .fs-head
+ {
+    margin-top: 4.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(236, 237, 237);
+    letter-spacing: 0.07rem;
+ }
+ .fs-body
+ {
+    padding-top: 1rem;
+ }
+ .ri-shield-check-fill, .ri-bring-forward
+ {
+    color: #fbb913;
+    margin-right: 0.50rem;
+    font-size: 18px;
+ }
+
+ .fs-body ul li{
+    margin-top: 1.5rem;
+    font-size: 0.94rem;
+    color: #cecbcb;
+    letter-spacing: 0.04rem;
+ }
+
+  /*--  Category Bottom Section ---- */
+ .category-feature-bottom 
+ {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-bottom: 2px solid #fbb913;
+    padding-bottom: 2.5rem;
+ }
+ .bottom-content p{
+    font-size: 0.95rem;
+    line-height: 1.8rem;
+    color: #bcbaba;
+    margin-top: 1rem;
+    letter-spacing: 0.05rem;
+    margin-bottom: 1.75rem;
+ }
+ .kp-button{
+    background: linear-gradient(22deg, rgba(2,0,36,1) 0%, rgb(251 185 19 / 77%) 0%, rgb(251 185 19 / 83%) 25%, rgb(105 185 182 / 86%) 66%, rgb(0 241 255 / 71%) 92%);
+    font-size: 1rem;
+    border-radius: 5px;
+    margin: 1.25rem 0;
+    /* transition: 1s linear; */
+    opacity: 0.85;
+  }
+  .kp-button:hover{
+    opacity: 1;
+    
+  }
+
+ /* Category section media devices */
+
+ @media(676px <= width <= 972px)
+ {
+  .category-top
+  {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     flex-direction:column-reverse;
+     padding: 2rem 1rem;
+  }
+ }
+
+ @media (width <= 675px)
+ {
+  .category_section
+  {
+    padding: 4rem 0.10rem;
+  }
+  .category-top
+  {
+     grid-template-columns:1fr;
+     justify-content: flex-start;
+     padding: 2rem 0;
+     gap: 0.50rem;
+  }
+  .category-leftBox 
+  {
+     padding-left: 0.10rem;
+  }
+  .categry_imgBox
+  {
+     width: auto;
+     height: 200px;
+     padding: 0.20rem;
+  }
+  .category-head
+  {
+     font-size:2rem;
+     font-weight: 600; 
+  }
+
+  .category-right-content p
+  {
+     font-size: 0.90rem;
+     color: rgb(209, 209, 209);
+     letter-spacing: 0.05rem;
+     font-weight: 300;
+     line-height: 1.6rem;
+     text-align:start
+  }
+   /*--  Category Features Section ---- */
+
+   .category-feature-section
+   {
+      display: flex;
+     align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-direction: column;
+      margin-top: 1rem;
+   }
+   .category-fs-leftBox
+    {
+      padding-right: 0rem;
+      padding-left: 0.10rem;
+    }
+    .category-fs-rightBox
+    {
+       margin-top:0.5rem;
+       padding-left: 0.10rem;
+    }
+    .fs-head
+    {
+       margin-top: 2.5rem;
+       margin-bottom: 0.50rem;
+       font-size: 1.1rem;
+       font-weight: 500;
+       letter-spacing: 0.06rem;
+    }
+    .fs-body
+    {
+       padding-top: 0.80rem;
+    }
+    .fs-body ul li{
+      font-size: 0.90rem;
+   }
+   .category-feature-bottom 
+   {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-bottom: 2px solid #fbb913;
+      padding-bottom: 2rem;
+   }
+   .bottom-content p
+    {
+      font-size: 0.90rem;
+      line-height: 1.7rem;
+      
+  }
+
+ }
+
+ </style>
+
+<!--====================CATEGORY TOP SECTION ====================-->
+<section class="category_section section" >
+    <div class="category-container container-fluid">
+
+        <div class="category-top grid">
+
+            <div class="category-leftBox">
+                <div class="categry_imgBox">
+                    {% if categorie.categorie_image %}
+            
+                    <img src="{{categorie.categorie_image.url}}" alt="{{categorie.img_alttag}}"  data-aos="zoom-in" data-aos-duration="1300">
+                   {% endif %}
+                </div>
+            </div>
+            <div class="category-rightBox">
+
+                <div class="category-head">
+                    <h2 class=""data-aos="flip-right" data-aos-duration="1500">{{categorie.categorie_name}}</h2>
+                </div>
+                <div class="category-right-content">
+                  {% for ctd in ctg_details %}
+                    <p data-aos="zoom-in" data-aos-duration="1500">
+                      
+                          {% if ctd.content_position == 1 %}
+                            {{ctd.details}}
+                          {% endif %}
+                       
+                    </p>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="category-feature-section container">
+            <div class="category-fs-leftBox">
+                <div class="fs-head" data-aos="fade-up" data-aos-duration="1300">
+                    <h4>Main  Features</h4>
+                </div>
+                <div class="fs-body">
+                    <ul>
+                      {% for f in features %}
+                      {% if f.type_feature == '1' %}
+                        <li class="flex" data-aos="fade-up" data-aos-duration="1500">
+                            <i class="ri-shield-check-fill"></i>
+                            <p>
+
+                                  {{f.feature}}
+                            </p>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="category-fs-rightBox">
+                <div class="fs-head" data-aos="fade-up" data-aos-duration="1300">
+                    <h4>Customization Options:</h4>
+                </div>
+                <div class="fs-body">
+                    <ul>
+                      {% for f in features %}
+                      {% if f.type_feature == '2' %}
+                      <li class="flex" data-aos="fade-up" data-aos-duration="1500">
+                          <i class="ri-shield-check-fill"></i>
+                          <p>
+                          
+                            {{f.feature}}
+
+                          </p>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    
+                    
+        <div class="category-feature-bottom container">
+            <div class="bottom-content">
+              {% for ctd in ctg_details %}
+                <p data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom" data-aos-duration="1400">
+                {% if ctd.content_position == 2 %}
+                  {{ctd.details}}
+                {% endif %}
+                </p>
+                {% endfor %}
+            </div>
+            <a href="{% url 'serviceEnquiry' %}"><button class="buttons kp-button">Know Plan & Pricing</button></a>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!--====================CATEGORY TEMPLATE SECTION ====================-->
+<section class="category_Tempsection section">
+    <div class="categoryBox container-fluid">
+        <div class="wrapper">
+            <h1 class="section-header">TEMPLATES</h1>
+            <!-- <P class="section-paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Quam assumenda nulla aspernatur enim ut, minima.
+            </P> -->
+            <div class="templateslist__Box" id="sub-images-container">
+              {% for temp in templates %}
+              <div class="template">
+                <div class="tmp-body">
+                  <a href="{% url 'TemplateView' temp.id %}" class="temp__card sub-image-card">
+                
+                      {% if temp.template_image %}
+                      <img src="{{temp.template_image.url}}" alt="{{temp.template_img_alttag}}">
+                      {% endif %}
+                      {% if temp.template_code %}
+                      <p style="color: aliceblue; margin-bottom:0.40rem;"> Code : {{temp.template_code}}</p>
+                      {% endif %}
+                  </a>
+                </div>
+                <div class="tmp-price"><span><i class='bx bx-rupee'></i><strike>5999</strike></span><span class="template-price"><i class='bx bx-rupee price-icon'></i>{{temp.template_price}}</span></div>
+                <p>Last Updated: {{temp.template_publish_date}}</p>
+                <div class="footer-buttons grid">
+                  <button class="tmp-cart-button"><i class='bx bx-cart' ></i></button>
+                  <button class="tmp-lp-button" onclick="window.location.href=`{% url 'TemplateView' temp.id %}`">Live Preview</button>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+      
+        </div>
+       
+    </div>
+</section>
+
+<style>
+  .templateslist__Box
+  {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:2rem ;
+    row-gap: 5rem;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+  }
+ 
+  .temp__card
+  {
+    height: 275px;
+  }
+  .temp__card img{
+    width: 100%;
+    height: 100%;
+  }
+  .temp__card:hover 
+  {
+    background:rgba(0, 0, 0, 0.5);
+    opacity: 0.7; 
+  }
+  .temp_head
+  {
+ text-align: start;
+  color: rgb(12, 64, 106);
+  font-size: 24px;
+  font-weight: 400;
+  padding-left: 1rem;
+  height: 50px;
+  background: #ffffff;
+  
+  }
+  @media (max-width:575px)
+  {
+    .templateslist__Box
+    {
+      grid-template-columns: repeat(1,1fr);
+      padding: 0.50rem 1rem;
+      row-gap: 3rem;
+    }
+  }
+</style>
+
+<script>
+    // ABOUT PAGE ANIMATION 
+    (function(name, factory) {
+        if (typeof window === 'object') {
+          window[name] = factory()
+        }
+      })('Ribbons', function() {
+        var _w = window,
+          _b = document.body,
+          _d = document.documentElement
+      
+        // random helper
+        var random = function() {
+          if (arguments.length === 1) {
+            // only 1 argument
+            if (Array.isArray(arguments[0])) {
+              // extract index from array
+              var index = Math.round(random(0, arguments[0].length - 1))
+              return arguments[0][index]
+            }
+            return random(0, arguments[0]) // assume numeric
+          } else if (arguments.length === 2) {
+            // two arguments range
+            return Math.random() * (arguments[1] - arguments[0]) + arguments[0]
+          } else if (arguments.length === 4) {
+            //
+      
+            var array = [arguments[0], arguments[1], arguments[2], arguments[3]]
+            return array[Math.floor(Math.random() * array.length)]
+            //return console.log(item)
+          }
+          return 0 // default
+        }
+      
+        // screen helper
+        var screenInfo = function(e) {
+          var width = Math.max(
+              0,
+              _w.innerWidth || _d.clientWidth || _b.clientWidth || 0
+            ),
+            height = Math.max(
+              0,
+              _w.innerHeight || _d.clientHeight || _b.clientHeight || 0
+            ),
+            scrollx =
+              Math.max(0, _w.pageXOffset || _d.scrollLeft || _b.scrollLeft || 0) -
+              (_d.clientLeft || 0),
+            scrolly =
+              Math.max(0, _w.pageYOffset || _d.scrollTop || _b.scrollTop || 0) -
+              (_d.clientTop || 0)
+      
+          return {
+            width: width,
+            height: height,
+            ratio: width / height,
+            centerx: width / 2,
+            centery: height / 2,
+            scrollx: scrollx,
+            scrolly: scrolly
+          }
+        }
+      
+        // mouse/input helper
+        var mouseInfo = function(e) {
+          var screen = screenInfo(e),
+            mousex = e ? Math.max(0, e.pageX || e.clientX || 0) : 0,
+            mousey = e ? Math.max(0, e.pageY || e.clientY || 0) : 0
+      
+          return {
+            mousex: mousex,
+            mousey: mousey,
+            centerx: mousex - screen.width / 2,
+            centery: mousey - screen.height / 2
+          }
+        }
+      
+        // point object
+        var Point = function(x, y) {
+          this.x = 0
+          this.y = 0
+          this.set(x, y)
+        }
+        Point.prototype = {
+          constructor: Point,
+      
+          set: function(x, y) {
+            this.x = x || 0
+            this.y = y || 0
+          },
+          copy: function(point) {
+            this.x = point.x || 0
+            this.y = point.y || 0
+            return this
+          },
+          multiply: function(x, y) {
+            this.x *= x || 1
+            this.y *= y || 1
+            return this
+          },
+          divide: function(x, y) {
+            this.x /= x || 1
+            this.y /= y || 1
+            return this
+          },
+          add: function(x, y) {
+            this.x += x || 0
+            this.y += y || 0
+            return this
+          },
+          subtract: function(x, y) {
+            this.x -= x || 0
+            this.y -= y || 0
+            return this
+          },
+          clampX: function(min, max) {
+            this.x = Math.max(min, Math.min(this.x, max))
+            return this
+          },
+          clampY: function(min, max) {
+            this.y = Math.max(min, Math.min(this.y, max))
+            return this
+          },
+          flipX: function() {
+            this.x *= -1
+            return this
+          },
+          flipY: function() {
+            this.y *= -1
+            return this
+          }
+        }
+      
+        // class constructor
+        var Factory = function(options) {
+          this._canvas = null
+          this._context = null
+          this._sto = null
+          this._width = 0
+          this._height = 0
+          this._scroll = 0
+          this._ribbons = []
+          this._options = {
+            // ribbon color HSL saturation amount
+            colorSaturation: '80%',
+            // ribbon color HSL brightness amount
+            colorBrightness: '60%',
+            // ribbon color opacity amount
+            colorAlpha: 0.65,
+            // how fast to cycle through colors in the HSL color space
+            colorCycleSpeed: 6,
+            // where to start from on the Y axis on each side (top|min, middle|center, bottom|max, random)
+            verticalPosition: 'center',
+            // how fast to get to the other side of the screen
+            horizontalSpeed: 150,
+            // how many ribbons to keep on screen at any given time
+            ribbonCount: 3,
+            // add stroke along with ribbon fill colors
+            strokeSize: 0,
+            // move ribbons vertically by a factor on page scroll
+            parallaxAmount: -0.5,
+            // add animation effect to each ribbon section over time
+            animateSections: true
+          }
+          this._onDraw = this._onDraw.bind(this)
+          this._onResize = this._onResize.bind(this)
+          this._onScroll = this._onScroll.bind(this)
+          this.setOptions(options)
+          this.init()
+        }
+      
+        // class prototype
+        Factory.prototype = {
+          constructor: Factory,
+      
+          // Set and merge local options
+          setOptions: function(options) {
+            if (typeof options === 'object') {
+              for (var key in options) {
+                if (options.hasOwnProperty(key)) {
+                  this._options[key] = options[key]
+                }
+              }
+            }
+          },
+      
+          // Initialize the ribbons effect
+          init: function() {
+            try {
+              this._canvas = document.createElement('canvas')
+              this._canvas.style['display'] = 'block'
+              this._canvas.style['position'] = 'fixed'
+              this._canvas.style['margin'] = '0'
+              this._canvas.style['padding'] = '0'
+              this._canvas.style['border'] = '0'
+              this._canvas.style['outline'] = '0'
+              this._canvas.style['left'] = '0'
+              this._canvas.style['top'] = '0'
+              this._canvas.style['width'] = '100%'
+              this._canvas.style['height'] = '100%'
+              this._canvas.style['z-index'] = '-1'
+              this._onResize()
+      
+              this._context = this._canvas.getContext('2d')
+              this._context.clearRect(0, 0, this._width, this._height)
+              this._context.globalAlpha = this._options.colorAlpha
+      
+              window.addEventListener('resize', this._onResize)
+              window.addEventListener('scroll', this._onScroll)
+              document.body.appendChild(this._canvas)
+            } catch (e) {
+              console.warn('Canvas Context Error: ' + e.toString())
+              return
+            }
+            this._onDraw()
+          },
+      
+          // Create a new random ribbon and to the list
+          addRibbon: function() {
+            // movement data
+            var dir = Math.round(random(1, 9)) > 5 ? 'right' : 'left',
+              stop = 1000,
+              hide = 200,
+              min = 0 - hide,
+              max = this._width + hide,
+              movex = 0,
+              movey = 0,
+              startx = dir === 'right' ? min : max,
+              starty = Math.round(random(0, this._height))
+      
+            // asjust starty based on options
+            if (/^(top|min)$/i.test(this._options.verticalPosition)) {
+              starty = 0 + hide
+            } else if (/^(middle|center)$/i.test(this._options.verticalPosition)) {
+              starty = this._height / 2
+            } else if (/^(bottom|max)$/i.test(this._options.verticalPosition)) {
+              starty = this._height - hide
+            }
+      
+            // ribbon sections data
+            var ribbon = [],
+              point1 = new Point(startx, starty),
+              point2 = new Point(startx, starty),
+              point3 = null,
+              color = Math.round(random(35, 35, 40, 40)),
+              delay = 0
+      
+            // buils ribbon sections
+            while (true) {
+              if (stop <= 0) break
+              stop--
+      
+              movex = Math.round(
+                (Math.random() * 1 - 0.2) * this._options.horizontalSpeed
+              )
+              movey = Math.round((Math.random() * 1 - 0.5) * (this._height * 0.25))
+      
+              point3 = new Point()
+              point3.copy(point2)
+      
+              if (dir === 'right') {
+                point3.add(movex, movey)
+                if (point2.x >= max) break
+              } else if (dir === 'left') {
+                point3.subtract(movex, movey)
+                if (point2.x <= min) break
+              }
+              // point3.clampY( 0, this._height );
+              //console.log(Math.round(random(1, 5)))
+              ribbon.push({
+                // single ribbon section
+                point1: new Point(point1.x, point1.y),
+                point2: new Point(point2.x, point2.y),
+                point3: point3,
+                color: color,
+                delay: delay,
+                dir: dir,
+                alpha: 0,
+                phase: 0
+              })
+      
+              point1.copy(point2)
+              point2.copy(point3)
+      
+              delay += 4
+              //color += 1
+              //console.log('colorCycleSpeed', color)
+            }
+            this._ribbons.push(ribbon)
+          },
+      
+          // Draw single section
+          _drawRibbonSection: function(section) {
+            if (section) {
+              if (section.phase >= 1 && section.alpha <= 0) {
+                return true // done
+              }
+              if (section.delay <= 0) {
+                section.phase += 0.02
+                section.alpha = Math.sin(section.phase) * 1
+                section.alpha = section.alpha <= 0 ? 0 : section.alpha
+                section.alpha = section.alpha >= 1 ? 1 : section.alpha
+      
+                if (this._options.animateSections) {
+                  var mod = Math.sin(1 + section.phase * Math.PI / 2) * 0.1
+      
+                  if (section.dir === 'right') {
+                    section.point1.add(mod, 0)
+                    section.point2.add(mod, 0)
+                    section.point3.add(mod, 0)
+                  } else {
+                    section.point1.subtract(mod, 0)
+                    section.point2.subtract(mod, 0)
+                    section.point3.subtract(mod, 0)
+                  }
+                  section.point1.add(0, mod)
+                  section.point2.add(0, mod)
+                  section.point3.add(0, mod)
+                }
+              } else {
+                section.delay -= 0.5
+              }
+              //console.log('section.color', section.color)
+              var s = this._options.colorSaturation,
+                l = this._options.colorBrightness,
+                c =
+                  'hsla(' +
+                  section.color +
+                  ', ' +
+                  s +
+                  ', ' +
+                  l +
+                  ', ' +
+                  section.alpha +
+                  ' )'
+      
+              this._context.save()
+      
+              if (this._options.parallaxAmount !== 0) {
+                this._context.translate(
+                  0,
+                  this._scroll * this._options.parallaxAmount
+                )
+              }
+              this._context.beginPath()
+              this._context.moveTo(section.point1.x, section.point1.y)
+              this._context.lineTo(section.point2.x, section.point2.y)
+              this._context.lineTo(section.point3.x, section.point3.y)
+              this._context.fillStyle = c
+              this._context.fill()
+      
+              if (this._options.strokeSize > 0) {
+                this._context.lineWidth = this._options.strokeSize
+                this._context.strokeStyle = c
+                this._context.lineCap = 'round'
+                this._context.stroke()
+              }
+              this._context.restore()
+            }
+            return false // not done yet
+          },
+      
+          // Draw ribbons
+          _onDraw: function() {
+            // cleanup on ribbons list to rtemoved finished ribbons
+            for (var i = 0, t = this._ribbons.length; i < t; ++i) {
+              if (!this._ribbons[i]) {
+                this._ribbons.splice(i, 1)
+              }
+            }
+      
+            // draw new ribbons
+            this._context.clearRect(0, 0, this._width, this._height)
+      
+            for (
+              var a = 0;
+              a < this._ribbons.length;
+              ++a // single ribbon
+            ) {
+              var ribbon = this._ribbons[a],
+                numSections = ribbon.length,
+                numDone = 0
+      
+              for (
+                var b = 0;
+                b < numSections;
+                ++b // ribbon section
+              ) {
+                if (this._drawRibbonSection(ribbon[b])) {
+                  numDone++ // section done
+                }
+              }
+              if (numDone >= numSections) {
+                // ribbon done
+                this._ribbons[a] = null
+              }
+            }
+            // maintain optional number of ribbons on canvas
+            if (this._ribbons.length < this._options.ribbonCount) {
+              this.addRibbon()
+            }
+            requestAnimationFrame(this._onDraw)
+          },
+      
+          // Update container size info
+          _onResize: function(e) {
+            var screen = screenInfo(e)
+            this._width = screen.width
+            this._height = screen.height
+      
+            if (this._canvas) {
+              this._canvas.width = this._width
+              this._canvas.height = this._height
+      
+              if (this._context) {
+                this._context.globalAlpha = this._options.colorAlpha
+              }
+            }
+          },
+      
+          // Update container size info
+          _onScroll: function(e) {
+            var screen = screenInfo(e)
+            this._scroll = screen.scrolly
+          }
+        }
+      
+        // export
+        return Factory
+      })
+      
+      new Ribbons({
+        colorSaturation: '60%',
+        colorBrightness: '50%',
+        colorAlpha: 0.5,
+        colorCycleSpeed: 5,
+        verticalPosition: 'random',
+        horizontalSpeed: 200,
+        ribbonCount: 3,
+        strokeSize: 0,
+        parallaxAmount: -0.2,
+        animateSections: true
+      })
+
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.category-card').click(function () {
+                var categoryId = $(this).data('category-id');
+                console.log(categoryId)
+                window.location.href = '/Templates/' + categoryId + '/';
+                
+            });
+        });
+    </script>
+
+{% endblock %}
+
+<div class="categeory_headBox ">
+    <h2>HTML Template Categories</h2>
+</div>
+<div class="wrapper">
+    <button class="arrow prev"><i class="ri-arrow-left-s-line"></i></button>
+    <button class="arrow next"><i class="ri-arrow-right-s-line"></i></button>
+    <div class="card-wrapper">
+     
+      
+        <div class="card-item category-card"  data-category-id="{{ categorie.id }}">
+            <div class="card-info">
+                <a href="#" class="card-title">{{categori.categorie_name}}</a>
+               
+            </div>
+           
+           
+        </div>
+       
+       
+    </div>
+</div>

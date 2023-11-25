@@ -1,0 +1,309 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    input[type=text],input[type=date],input[type=time],select,textarea
+    {
+        width: 100%;
+    }
+    .bi-star-fill
+    {
+        color: #f6de0a;
+        font-size: 1rem;
+    }
+    .template .section__form
+    {
+        padding: 2rem 0.05rem;
+    }
+    .template .form__head
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .form__head h2{
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .form__head button{
+        padding: 0.40rem 4rem;
+        background-color: rgb(134, 46, 156);
+        color: #ffff;
+        font-weight: 700;
+        border-radius:5px;
+        font-size: 0.90rem;
+        letter-spacing: 0.06rem;
+        border: none;
+        outline:none;
+    }
+    .input__section, .date__inputBox
+    {
+        margin-top: 1.5rem;
+    }
+    .input__section .card
+    {
+        padding: 1.5rem 1rem;
+    }
+    .card__head h5{
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.06rem;
+    }
+    .radio__inputBox
+    {
+        margin-top: 1.5rem;
+    }
+    .radio__inputBox input[type=radio]
+    {
+        margin-top: 0.50rem;
+        
+    }
+    .radio__inputBox  span{
+        margin-left: 0.40rem;
+        font-size: 0.80rem;
+        font-weight: 500;
+    }
+    .input__group
+    {
+        margin-top: 1rem;
+    }
+    .input__group label
+    {
+        margin-bottom: 0.40rem;
+        font-weight:600;
+        font-size: 0.88rem;
+    }
+    .input__group input, .input__group select, .input__group textarea
+    {
+        padding: 0.50rem;
+        font-size: 0.80rem;
+        border: 1px solid #ecebeb;
+    }
+    .input__group textarea
+    {
+        height: 250px;
+    }
+    .input__group input:focus, .input__group select:focus, .input__group textarea:focus
+    {
+        border: 1px solid #bad2df;
+        outline:1px solid #bad2df ;
+    }
+    .input__group input::placeholder
+    {
+        font-size: 0.80rem;
+    }
+    .template__Box .image__Box
+    {
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ecebeb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+    .image__Box img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .video__Box
+    {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        border: 1px solid #ecebeb;
+    }
+    #video_display
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+    @media (max-width:575px)
+    {
+        .form__head
+        {
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form__head h2
+        {
+            font-size: 1.8rem;
+            
+        }
+        .form__head button{
+            width: 100%;
+            margin-top: 0.70rem;
+        }
+    }
+</style>
+
+<section class="template section">
+    <div class="container">
+        <form class="section__form" action="{% url 'template_save' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form__head">
+                <h2>Template Add</h2>
+                <button type="submit" id="">Save</button>
+            </div>
+            <div class="input__section">
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Visibility Status</h5>
+                        <div class="radio__inputBox">
+                            <input type="radio" name="visibility_opt" value="1" ><span>Published</span><br>
+                            <input type="radio" name="visibility_opt" value="2"><span>Scheduled</span><br>
+                            <input type="radio" name="visibility_opt" value="0"><span>Hidden</span><br>
+                                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Publish Schedule</h5>
+                        <div class="date__inputBox">
+                            <div class="input__group">
+                                <label>Publish Date</label>
+                                <input type="date" name="publish_date">
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Pick your Categorie </h5>
+                    </div>
+                    <div class="input__group">
+                    
+                        <select  name="slect_categori" id="Categori_Select">
+
+                            <option value="0">----/---</option>
+                            {% for categori in categories %}
+                            <option value="{{categori.id}}">{{categori.categorie_name}}</option>
+                            {% endfor %}
+
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Basic Information About Template</h5>
+                    </div>
+                    <div class="template__Box">
+                        <div class="input__group">
+                            <label>Template Name</label>
+                            <input type="text" name="temp_name" required>
+                        </div>
+                        <div class="input__group">
+                            <label>Discription</label>
+                            <textarea type="text" name="temp_discription" required></textarea>
+                        </div>
+                        <div class="input__group">
+                            <label>Price</label>
+                            <input type="text" name="temp_price" >
+                        </div>
+                        <div class="input__group">
+                            <label>Rating</label>
+                            <div class="radio__inputBox">
+                                <input type="radio" name="rating_opt" value="5" >
+                                <span>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span><br>
+                                <input type="radio" name="rating_opt" value="4"><span>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    
+                                </span><br>
+                                <input type="radio" name="rating_opt" value="3"><span>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    
+                                </span><br>
+                                <input type="radio" name="rating_opt" value="2"><span>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </span><br>
+                                <input type="radio" name="rating_opt" value="1"><span>
+                                    <i class="bi bi-star-fill"></i>
+                                    
+
+                                </span><br>
+                            </div>  
+                        </div>
+
+                        <div class="input__group">
+                            <label> Image</label>
+                            <input type="file" name="temp_img" id="imageInput" accept="image/png, image/jpeg" required>
+                        </div>
+                        <div class="input__group">
+                            <div class="image__Box" >
+                                <img src="{% static 'assets/img/dummy_file.png' %}" id="img_display">
+                            </div>
+                        </div>
+                        <div class="input__group">
+                            <label>Tag</label>
+                            <input type="text" name="tag_name" required>
+                        </div>
+
+                        <div class="input__group">
+                            <label> Preview Video </label>
+                            <input type="file" name="temp_video" id="vedioInput" accept="video/mp4" onchange="previewVideo(event)" required>
+                        </div>
+                        <div class="input__group" id="">
+                            <div class="video__Box" >
+                                <video id="video_display" controls></video>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+<!-- Video Preview-->
+<script>
+    function previewVideo(event) {
+      const file = event.target.files[0];
+      const video = document.getElementById('video_display');
+      const videoSource = URL.createObjectURL(file);
+      video.src = videoSource;
+    }
+  </script>
+  
+<script>
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var imagePreview = document.getElementById('img_display');
+        imagePreview.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    var imageInput = document.getElementById('imageInput');
+    imageInput.addEventListener('change', previewImage);
+</script>
+{% endblock %}

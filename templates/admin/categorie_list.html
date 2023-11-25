@@ -1,0 +1,97 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .card
+  {
+    padding: 1rem;
+  }
+  .card-body
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bi-trash
+  {
+    color: #dc3619;
+  }
+  
+  .messge__box
+  {
+    box-shadow: rgba(241, 48, 14, 0.381) 0px 0px 16px;
+    padding: 0.50rem;
+    display: flex;
+    margin-bottom: 1rem;
+    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffff;
+    background: #fe1818ac;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 5px;
+ 
+  }
+  .messge__box span
+  {
+    padding: 0.50rem;
+   
+  }
+  .messge__box span .bi-x-circle-fill
+  {
+    color: rgb(23, 22, 22);
+    cursor: pointer;
+  }
+  .messge__box span .bi-x-circle-fill:hover 
+  {
+    color: rgb(12, 12, 12);
+  }
+  .detalis-link span
+  {
+    font-size: 0.90rem;
+    margin-right: 0.30rem;
+    font-weight: 600;
+  }
+</style>
+
+
+<section class="section">
+      <div class="row">
+        {% for categorie in categories %}
+        <div class="col-md-6 col-sm-12 col-lg-4">
+          <div class="card">
+            <div class="text-end">
+              <a href="{% url 'category_details_add' categorie.id 2 %}" class="detalis-link"><span>Details</span> <i class="bi bi-plus-circle-fill"></i></a>
+            </div>
+           
+           
+              {% if categorie.categorie_image %}
+              <img src="{{categorie.categorie_image.url}}" alt="{{categorie.img_alttag}}">
+              {% endif %}
+          
+            <div class="card-body">
+             
+             
+              <h5 class="card-title mt-2">{{categorie.categorie_name}}</h5>
+              <p class="mt-2">
+                {% if categorie.status == '1' %}
+                <span class="badge text-success">Published :- <i class="bi bi-circle-fill"></i></span>
+                {% elif categorie.status == '2' %}
+                    <span class="badge text-warning">Scheduled :- <i class="bi bi-circle-fill"></i></span>
+                {% else %}
+                <span class="badge text-danger">Hidden :- <i class="bi bi-circle-fill"></i></span>
+                {% endif %}
+              </p>
+              <a href="{% url 'categorie_remove' categorie.id %}"><i class="bi bi-trash mt-2"></i></a>
+            </div>
+            
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+</section>
+
+{% endblock%}

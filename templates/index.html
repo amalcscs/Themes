@@ -1,0 +1,918 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #14101d;
+        background-image: radial-gradient( circle, rgba(  0, 0, 0, 0 ) 0%, rgba( 0, 0, 0, 0.8 ) 100% );
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+     }
+    .template__card
+    {
+    background-color: rgb(255, 255, 255);
+    margin: 0.20rem 0.30rem;
+    -webkit-animation: bannermove 10s linear infinite;
+    animation: bannermove 10s linear infinite ;
+    }
+
+
+    @keyframes bannermove {
+    from {
+        transform: translateY(0%);
+    }
+    to {
+        transform: translateY(-110%);
+    }
+    }
+</style>
+
+<!-- // Timeline Container -->
+<style>
+  
+.timeline 
+{
+margin: 20px auto;
+padding: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Card container */
+.card {
+position: relative;
+max-width: 850px;
+}
+
+/* setting padding based on even or odd */
+.card:nth-child(odd) {
+padding: 30px 0 30px 30px;
+}
+.card:nth-child(even) {
+padding: 30px 30px 30px 0;
+}
+/* Global ::before */
+.card::before {
+content: "";
+position: absolute;
+width: 50%;
+border: solid orangered;
+}
+
+/* Setting the border of top, bottom, left */
+.card:nth-child(odd)::before {
+left: 0px;
+top: -4.5px;
+bottom: -4.5px;
+border-width: 5px 0 5px 5px;
+border-radius: 50px 0 0 50px;
+}
+
+/* Setting the top and bottom to "-5px" because earlier it was out of a pixel in mobile devices */
+@media only screen and (max-width: 400px) {
+.card:nth-child(odd)::before {
+top: -5px;
+bottom: -5px;
+}
+}
+
+/* Setting the border of top, bottom, right */
+.card:nth-child(even)::before {
+right: 0;
+top: 0;
+bottom: 0;
+border-width: 5px 5px 5px 0;
+border-radius: 0 50px 50px 0;
+}
+
+/* Removing the border if it is the first card */
+.card:first-child::before {
+border-top: 0;
+border-top-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's odd */
+.card:last-child:nth-child(odd)::before {
+border-bottom: 0;
+border-bottom-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's even */
+.card:last-child:nth-child(even)::before {
+border-bottom: 0;
+border-bottom-right-radius: 0;
+}
+
+/* Information about the timeline */
+.info {
+display: flex;
+flex-direction: column;
+background:rgba( 0, 0, 0, 0.5);
+color: rgb(206, 202, 202);
+border-radius: 10px;
+padding: 20px;
+}
+
+/* Title of the card */
+.title {
+color: orangered;
+position: relative;
+margin-bottom: 1rem;
+letter-spacing: 0.06rem;
+font-size: 1.6rem;
+}
+
+/* Timeline dot  */
+.title::before {
+content: "";
+position: absolute;
+width: 10px;
+height: 10px;
+background: white;
+border-radius: 999px;
+border: 3px solid orangered;
+}
+.info p{
+  line-height: 1.8rem;
+}
+
+/* text right if the card is even  */
+.card:nth-child(even) > .info > .title {
+text-align: right;
+}
+
+/* setting dot to the left if the card is odd */
+.card:nth-child(odd) > .info > .title::before {
+left: -45px;
+}
+
+/* setting dot to the right if the card is odd */
+.card:nth-child(even) > .info > .title::before {
+right: -45px;
+}
+
+</style>
+
+    <!--==================== TOP SECTION ====================-->
+
+              <section class="Top_section " id="Top_Section" >
+
+                <div class="home__container  container-fluid grid " >
+                    <div class="home__data"  >
+                        <h1 class="home__title" data-aos="zoom-in" data-aos-duration="2500">Discover the Perfect Theme for your Website </h1>
+                        <p class="home__description1 "data-aos="zoom-in" data-aos-duration="2500">
+                            <span>Find the ideal theme for your website, tailored to perfection and ready to impress.</span>
+                            
+                        </p>                 
+                    </div>
+                    <div class="TemplateBox flex updown">
+                        <div class="lefttemplate">
+                            <img src="{% static 'img/home_right1.jpg' %}" alt="#" data-aos="zoom-out"  data-aos-duration="1500">
+                        </div>
+                        <div class="righttemplate">
+                            <img src="{% static 'img/product_temp2.png' %}" alt="#"  data-aos="zoom-in-up"  data-aos-duration="2000">
+                        </div>
+                    </div>
+                    
+                    
+                      
+                  
+                </div>
+                
+                <div class="area" >
+
+                    <ul class="circles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                    </ul>
+                </div >
+               
+              </section>
+
+            
+    <!-- =================== TEMPLATE LIST =======================-->
+              <section class="Templates_section section" >
+                <div class="template__container container-fluid grid" >
+                   
+                    <div class="template__listBox">
+                       {% for template in templates %}
+                        <div class="template__card">
+                           
+                              {% if template.template_image %}
+                                <img src="{{template.template_image.url}}" alt="{{template.template_img_alttag}}"> 
+                              {% endif %}
+                           
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                    <div class="template__content">
+                        <h2>Build Your Website With Altos Theme Hub</h2>
+                        <p>Discover a collection of professionally designed website templates that empower your brand and 
+                            captivate your audience making your online presence truly extraordinary.
+                        </p>
+                        <div class="template__btnBox">
+                            <a href="{% url 'categoryPage' %}"><button class="buttons">GET  ALL TEMPLATES</button></a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                
+
+              </section>
+
+              
+    <!--=====================BENIFITS ==========================-->
+      
+    <section class="benift__section section " >
+      <div class="benifit__container container ">
+          <div class="benift__top ">
+
+              <h1 class="benift__top__head">Altos Theme Store</h1>
+              <P class="benift__top__content">
+                  Welcome to Altos Theme Store, your ultimate destination for premium website themes. 
+                  Discover a wide
+                  range of beautifully designed and customizable themes that empower your online presence with style,
+                  functionality, and unmatched quality.
+              </P>
+              
+              <div class="benift__buttonbox">
+                  <a href="{% url 'ProductPage' %}"><button class="benift__btn buttons">Discover Altos <i class="ri-arrow-right-s-line"></i></button></a>
+              </div>
+
+          </div>     
+         
+      </div>
+      <div class="container benifit__listBox">
+          <h2>What Benefit</h2>
+          <div class="timeline">
+              <div class="outer">
+                <div class="card" >
+                  <div class="icon__box" data-aos="fade-up" data-aos-duration="1300">
+                      <img src="{% static 'img/b1.png' %}" alt="icon_image">
+                  </div>
+                  <div class="info" data-aos="fade-up" data-aos-duration="1300">
+                    <h3 class="title">Visually Stunning</h3>
+                    <p>
+                      Our templates are built with the latest web development standards, 
+                      ensuring compatibility with future updates and technologies. Stay ahead 
+                      of the curve and future-proof your website with our cutting-edge templates.
+                    </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="icon__box" data-aos="fade-up" data-aos-duration="1400">
+                      <img src="{% static 'img/b2.png' %}" alt="icon_image">
+                  </div>
+                  <div class="info" data-aos="fade-up" data-aos-duration="1400">
+                    <h3 class="title">Customizable</h3>
+                    <p>
+                      Our templates are built with the latest web development standards, 
+                      ensuring compatibility with future updates and technologies. Stay ahead 
+                      of the curve and future-proof your website with our cutting-edge templates.
+                    </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="icon__box" data-aos="fade-up" data-aos-duration="1500">
+                      <img src="{% static 'img/b3.png' %}" alt="icon_image">
+                  </div>
+                  <div class="info" data-aos="fade-up" data-aos-duration="1500">
+                    <h3 class="title">Optimized</h3>
+                    <p>
+                      Our templates are optimized for a seamless user experience, 
+                      ensuring intuitive navigation, fast loading times, and responsive design across all devices. 
+                      Delight your visitors with a website that is both visually
+                      appealing and user-friendly </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="icon__box" data-aos="fade-up" data-aos-duration="1600">
+                      <img src="{% static 'img/b4.png' %}" alt="icon_image">
+                  </div>
+                  <div class="info" data-aos="fade-up" data-aos-duration="1600">
+                    <h3 class="title">Crafted Templates</h3>
+                    <p>
+                      Our templates are meticulously crafted by top designers to ensure 
+                      eye-catching aesthetics that instantly
+                      captivate your audience and leave a lasting impression.
+                   </p>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+         
+      </div>
+      
+       
+      
+    </section>
+           
+
+    <!--=====================PRODUCT SECTION ==========================-->
+
+    <section class="product__section section" >
+      <div class="product__container container grid">
+          <div class="product__top " data-aos="fade-right"
+          data-aos-duration="1500"
+          data-aos-easing="ease-in-sine">
+              <h2>We’ll Help You Get Started</h2>
+              <!-- <p></p> -->
+              <div class="product__btnBox">
+                  <a href="{% url 'ProductPage' %}"><button>LOOK OUR PRODUCT</button></a>
+              </div>
+          </div>
+          <div class="product__content">
+              <div class="product__box">
+                  <div class="cardBox" data-aos="zoom-out-right" data-aos-duration="1500">
+                      <h1>01</h1>
+                      <div class="inner__cardbox">
+                          <h3>Professional Templates</h3>
+                          <p>
+                              We Will Help You to Get Started with the Perfect Template. Choose from our vast collection of
+                              professionally designed templates, tailored to suit various industries and preferences. Find the ideal
+                              starting point for your website and set the stage for your online success.
+                              
+                              
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+              <div class="product__box">
+                  <div class="cardBox" data-aos="zoom-out-right" data-aos-duration="1400">
+                      <h1>02</h1>
+                      <div class="inner__cardbox">
+                          <h3>Website Development</h3>
+                          <p>
+                              We Will Help You to Get Started with a Stunning Website. Our experienced team of developers will bring
+                              your vision to life, creating a website that not only looks impressive but also delivers a seamless user
+                              experience. From responsive design to interactive features, we'll ensure your website stands out from
+                              the crowd. 
+                          </p>
+                         
+                      </div>
+                  </div>
+              </div>
+              <div class="product__box">
+                  <div class="cardBox" data-aos="zoom-out-right" data-aos-duration="1300">
+                      <h1>03</h1>
+                      <div class="inner__cardbox">
+                          <h3>Digital Marketing</h3>
+                          <p>
+                              We Will Help You to Get Started with Effective Digital Marketing Strategies. Maximize your online reach,
+                              drive targeted traffic, and achieve measurable results. Our digital marketing experts will craft tailored
+                              strategies, utilizing SEO, social media, PPC, and more, to elevate your brand's visibility and accelerate
+                              your growth.
+                              
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+  </section>
+
+
+    
+            
+    <!--====================  BOTTOM SECTION ====================-->
+
+            <section class="pricingTemplate_section section" >
+                <div class="pricingTemplate__container container">
+                
+                    <div class="pricingTemplate__box ">
+                        <div class="pricingTemplate__top ">
+                            <h1>Start With Beautiful Website Templates</h1>
+                            <p>Choose from 10,000+ awesome, mobile-friendly website templates for every kind of websites and blocks</p>
+                        </div>
+                        <div class="pricing__button">
+                            <a href="{% url 'categoryPage' %}"><button>EXPLOR ALL TEMPLATE</button></a>
+                        </div>
+                        <div class="TemplateBox flex">
+                            <div class="lefttemplate">
+                                <img src="{% static 'img/product_temp1.jpg' %}" alt="#" data-aos="zoom-in-up"  data-aos-duration="1500">
+                            </div>
+                            <div class="righttemplate">
+                                <img src="{% static 'img/product_temp2.png' %}" alt="#"  data-aos="zoom-in-up"  data-aos-duration="2000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+           
+    <!--=====================TESTIMONIAL SECTION ==========================-->
+
+              <section class="client__section section" >
+                <div class="client__container container-fluid">
+                    <div class="client__top ">
+                        <h3>Hear What Our Customers Have to Say</h3>
+                        <p> 
+                            Discover the glowing testimonials from our delighted customers who have experienced exceptional
+                            results with our products and services.
+                        </p>
+                    </div>
+              
+                    <div class="testimonialBox grid">
+                      
+                      {% for testimonial in testimonials%}
+                      <div class="testimonial__card ">
+                        <div class="testimonial_imgBox">
+                          {% if testimonial.testimonial_image %}
+                          <img src="{{testimonial.testimonial_image.url}}" alt="{{testimonial.testimonial_tag}}">
+                          {% endif %}
+                        </div>
+                        <div class="testmonial__contentBox">
+                          <p>
+                            <i class="ri-double-quotes-l"></i>
+                            {{testimonial.testimonial_discription}} 
+                            <i class="ri-double-quotes-r"></i>
+                          </p>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                    </div> 
+                </div>
+                <div class="container">
+                  <div class="client__log">
+                    <div class="client-track">
+                      {% for client in clients %}
+                      {% if client.client_image %}
+                      <div class="slide">
+                        <img src="{{client.client_image.url}}" alt="{{client.client_alttag}}">
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                      
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <script>
+                // ABOUT PAGE ANIMATION 
+                (function(name, factory) {
+                    if (typeof window === 'object') {
+                      window[name] = factory()
+                    }
+                  })('Ribbons', function() {
+                    var _w = window,
+                      _b = document.body,
+                      _d = document.documentElement
+                  
+                    // random helper
+                    var random = function() {
+                      if (arguments.length === 1) {
+                        // only 1 argument
+                        if (Array.isArray(arguments[0])) {
+                          // extract index from array
+                          var index = Math.round(random(0, arguments[0].length - 1))
+                          return arguments[0][index]
+                        }
+                        return random(0, arguments[0]) // assume numeric
+                      } else if (arguments.length === 2) {
+                        // two arguments range
+                        return Math.random() * (arguments[1] - arguments[0]) + arguments[0]
+                      } else if (arguments.length === 4) {
+                        //
+                  
+                        var array = [arguments[0], arguments[1], arguments[2], arguments[3]]
+                        return array[Math.floor(Math.random() * array.length)]
+                        //return console.log(item)
+                      }
+                      return 0 // default
+                    }
+                  
+                    // screen helper
+                    var screenInfo = function(e) {
+                      var width = Math.max(
+                          0,
+                          _w.innerWidth || _d.clientWidth || _b.clientWidth || 0
+                        ),
+                        height = Math.max(
+                          0,
+                          _w.innerHeight || _d.clientHeight || _b.clientHeight || 0
+                        ),
+                        scrollx =
+                          Math.max(0, _w.pageXOffset || _d.scrollLeft || _b.scrollLeft || 0) -
+                          (_d.clientLeft || 0),
+                        scrolly =
+                          Math.max(0, _w.pageYOffset || _d.scrollTop || _b.scrollTop || 0) -
+                          (_d.clientTop || 0)
+                  
+                      return {
+                        width: width,
+                        height: height,
+                        ratio: width / height,
+                        centerx: width / 2,
+                        centery: height / 2,
+                        scrollx: scrollx,
+                        scrolly: scrolly
+                      }
+                    }
+                  
+                    // mouse/input helper
+                    var mouseInfo = function(e) {
+                      var screen = screenInfo(e),
+                        mousex = e ? Math.max(0, e.pageX || e.clientX || 0) : 0,
+                        mousey = e ? Math.max(0, e.pageY || e.clientY || 0) : 0
+                  
+                      return {
+                        mousex: mousex,
+                        mousey: mousey,
+                        centerx: mousex - screen.width / 2,
+                        centery: mousey - screen.height / 2
+                      }
+                    }
+                  
+                    // point object
+                    var Point = function(x, y) {
+                      this.x = 0
+                      this.y = 0
+                      this.set(x, y)
+                    }
+                    Point.prototype = {
+                      constructor: Point,
+                  
+                      set: function(x, y) {
+                        this.x = x || 0
+                        this.y = y || 0
+                      },
+                      copy: function(point) {
+                        this.x = point.x || 0
+                        this.y = point.y || 0
+                        return this
+                      },
+                      multiply: function(x, y) {
+                        this.x *= x || 1
+                        this.y *= y || 1
+                        return this
+                      },
+                      divide: function(x, y) {
+                        this.x /= x || 1
+                        this.y /= y || 1
+                        return this
+                      },
+                      add: function(x, y) {
+                        this.x += x || 0
+                        this.y += y || 0
+                        return this
+                      },
+                      subtract: function(x, y) {
+                        this.x -= x || 0
+                        this.y -= y || 0
+                        return this
+                      },
+                      clampX: function(min, max) {
+                        this.x = Math.max(min, Math.min(this.x, max))
+                        return this
+                      },
+                      clampY: function(min, max) {
+                        this.y = Math.max(min, Math.min(this.y, max))
+                        return this
+                      },
+                      flipX: function() {
+                        this.x *= -1
+                        return this
+                      },
+                      flipY: function() {
+                        this.y *= -1
+                        return this
+                      }
+                    }
+                  
+                    // class constructor
+                    var Factory = function(options) {
+                      this._canvas = null
+                      this._context = null
+                      this._sto = null
+                      this._width = 0
+                      this._height = 0
+                      this._scroll = 0
+                      this._ribbons = []
+                      this._options = {
+                        // ribbon color HSL saturation amount
+                        colorSaturation: '80%',
+                        // ribbon color HSL brightness amount
+                        colorBrightness: '60%',
+                        // ribbon color opacity amount
+                        colorAlpha: 0.65,
+                        // how fast to cycle through colors in the HSL color space
+                        colorCycleSpeed: 6,
+                        // where to start from on the Y axis on each side (top|min, middle|center, bottom|max, random)
+                        verticalPosition: 'center',
+                        // how fast to get to the other side of the screen
+                        horizontalSpeed: 150,
+                        // how many ribbons to keep on screen at any given time
+                        ribbonCount: 3,
+                        // add stroke along with ribbon fill colors
+                        strokeSize: 0,
+                        // move ribbons vertically by a factor on page scroll
+                        parallaxAmount: -0.5,
+                        // add animation effect to each ribbon section over time
+                        animateSections: true
+                      }
+                      this._onDraw = this._onDraw.bind(this)
+                      this._onResize = this._onResize.bind(this)
+                      this._onScroll = this._onScroll.bind(this)
+                      this.setOptions(options)
+                      this.init()
+                    }
+                  
+                    // class prototype
+                    Factory.prototype = {
+                      constructor: Factory,
+                  
+                      // Set and merge local options
+                      setOptions: function(options) {
+                        if (typeof options === 'object') {
+                          for (var key in options) {
+                            if (options.hasOwnProperty(key)) {
+                              this._options[key] = options[key]
+                            }
+                          }
+                        }
+                      },
+                  
+                      // Initialize the ribbons effect
+                      init: function() {
+                        try {
+                          this._canvas = document.createElement('canvas')
+                          this._canvas.style['display'] = 'block'
+                          this._canvas.style['position'] = 'fixed'
+                          this._canvas.style['margin'] = '0'
+                          this._canvas.style['padding'] = '0'
+                          this._canvas.style['border'] = '0'
+                          this._canvas.style['outline'] = '0'
+                          this._canvas.style['left'] = '0'
+                          this._canvas.style['top'] = '0'
+                          this._canvas.style['width'] = '100%'
+                          this._canvas.style['height'] = '100%'
+                          this._canvas.style['z-index'] = '-1'
+                          this._onResize()
+                  
+                          this._context = this._canvas.getContext('2d')
+                          this._context.clearRect(0, 0, this._width, this._height)
+                          this._context.globalAlpha = this._options.colorAlpha
+                  
+                          window.addEventListener('resize', this._onResize)
+                          window.addEventListener('scroll', this._onScroll)
+                          document.body.appendChild(this._canvas)
+                        } catch (e) {
+                          console.warn('Canvas Context Error: ' + e.toString())
+                          return
+                        }
+                        this._onDraw()
+                      },
+                  
+                      // Create a new random ribbon and to the list
+                      addRibbon: function() {
+                        // movement data
+                        var dir = Math.round(random(1, 9)) > 5 ? 'right' : 'left',
+                          stop = 1000,
+                          hide = 200,
+                          min = 0 - hide,
+                          max = this._width + hide,
+                          movex = 0,
+                          movey = 0,
+                          startx = dir === 'right' ? min : max,
+                          starty = Math.round(random(0, this._height))
+                  
+                        // asjust starty based on options
+                        if (/^(top|min)$/i.test(this._options.verticalPosition)) {
+                          starty = 0 + hide
+                        } else if (/^(middle|center)$/i.test(this._options.verticalPosition)) {
+                          starty = this._height / 2
+                        } else if (/^(bottom|max)$/i.test(this._options.verticalPosition)) {
+                          starty = this._height - hide
+                        }
+                  
+                        // ribbon sections data
+                        var ribbon = [],
+                          point1 = new Point(startx, starty),
+                          point2 = new Point(startx, starty),
+                          point3 = null,
+                          color = Math.round(random(35, 35, 40, 40)),
+                          delay = 0
+                  
+                        // buils ribbon sections
+                        while (true) {
+                          if (stop <= 0) break
+                          stop--
+                  
+                          movex = Math.round(
+                            (Math.random() * 1 - 0.2) * this._options.horizontalSpeed
+                          )
+                          movey = Math.round((Math.random() * 1 - 0.5) * (this._height * 0.25))
+                  
+                          point3 = new Point()
+                          point3.copy(point2)
+                  
+                          if (dir === 'right') {
+                            point3.add(movex, movey)
+                            if (point2.x >= max) break
+                          } else if (dir === 'left') {
+                            point3.subtract(movex, movey)
+                            if (point2.x <= min) break
+                          }
+                          // point3.clampY( 0, this._height );
+                          //console.log(Math.round(random(1, 5)))
+                          ribbon.push({
+                            // single ribbon section
+                            point1: new Point(point1.x, point1.y),
+                            point2: new Point(point2.x, point2.y),
+                            point3: point3,
+                            color: color,
+                            delay: delay,
+                            dir: dir,
+                            alpha: 0,
+                            phase: 0
+                          })
+                  
+                          point1.copy(point2)
+                          point2.copy(point3)
+                  
+                          delay += 4
+                          //color += 1
+                          //console.log('colorCycleSpeed', color)
+                        }
+                        this._ribbons.push(ribbon)
+                      },
+                  
+                      // Draw single section
+                      _drawRibbonSection: function(section) {
+                        if (section) {
+                          if (section.phase >= 1 && section.alpha <= 0) {
+                            return true // done
+                          }
+                          if (section.delay <= 0) {
+                            section.phase += 0.02
+                            section.alpha = Math.sin(section.phase) * 1
+                            section.alpha = section.alpha <= 0 ? 0 : section.alpha
+                            section.alpha = section.alpha >= 1 ? 1 : section.alpha
+                  
+                            if (this._options.animateSections) {
+                              var mod = Math.sin(1 + section.phase * Math.PI / 2) * 0.1
+                  
+                              if (section.dir === 'right') {
+                                section.point1.add(mod, 0)
+                                section.point2.add(mod, 0)
+                                section.point3.add(mod, 0)
+                              } else {
+                                section.point1.subtract(mod, 0)
+                                section.point2.subtract(mod, 0)
+                                section.point3.subtract(mod, 0)
+                              }
+                              section.point1.add(0, mod)
+                              section.point2.add(0, mod)
+                              section.point3.add(0, mod)
+                            }
+                          } else {
+                            section.delay -= 0.5
+                          }
+                          //console.log('section.color', section.color)
+                          var s = this._options.colorSaturation,
+                            l = this._options.colorBrightness,
+                            c =
+                              'hsla(' +
+                              section.color +
+                              ', ' +
+                              s +
+                              ', ' +
+                              l +
+                              ', ' +
+                              section.alpha +
+                              ' )'
+                  
+                          this._context.save()
+                  
+                          if (this._options.parallaxAmount !== 0) {
+                            this._context.translate(
+                              0,
+                              this._scroll * this._options.parallaxAmount
+                            )
+                          }
+                          this._context.beginPath()
+                          this._context.moveTo(section.point1.x, section.point1.y)
+                          this._context.lineTo(section.point2.x, section.point2.y)
+                          this._context.lineTo(section.point3.x, section.point3.y)
+                          this._context.fillStyle = c
+                          this._context.fill()
+                  
+                          if (this._options.strokeSize > 0) {
+                            this._context.lineWidth = this._options.strokeSize
+                            this._context.strokeStyle = c
+                            this._context.lineCap = 'round'
+                            this._context.stroke()
+                          }
+                          this._context.restore()
+                        }
+                        return false // not done yet
+                      },
+                  
+                      // Draw ribbons
+                      _onDraw: function() {
+                        // cleanup on ribbons list to rtemoved finished ribbons
+                        for (var i = 0, t = this._ribbons.length; i < t; ++i) {
+                          if (!this._ribbons[i]) {
+                            this._ribbons.splice(i, 1)
+                          }
+                        }
+                  
+                        // draw new ribbons
+                        this._context.clearRect(0, 0, this._width, this._height)
+                  
+                        for (
+                          var a = 0;
+                          a < this._ribbons.length;
+                          ++a // single ribbon
+                        ) {
+                          var ribbon = this._ribbons[a],
+                            numSections = ribbon.length,
+                            numDone = 0
+                  
+                          for (
+                            var b = 0;
+                            b < numSections;
+                            ++b // ribbon section
+                          ) {
+                            if (this._drawRibbonSection(ribbon[b])) {
+                              numDone++ // section done
+                            }
+                          }
+                          if (numDone >= numSections) {
+                            // ribbon done
+                            this._ribbons[a] = null
+                          }
+                        }
+                        // maintain optional number of ribbons on canvas
+                        if (this._ribbons.length < this._options.ribbonCount) {
+                          this.addRibbon()
+                        }
+                        requestAnimationFrame(this._onDraw)
+                      },
+                  
+                      // Update container size info
+                      _onResize: function(e) {
+                        var screen = screenInfo(e)
+                        this._width = screen.width
+                        this._height = screen.height
+                  
+                        if (this._canvas) {
+                          this._canvas.width = this._width
+                          this._canvas.height = this._height
+                  
+                          if (this._context) {
+                            this._context.globalAlpha = this._options.colorAlpha
+                          }
+                        }
+                      },
+                  
+                      // Update container size info
+                      _onScroll: function(e) {
+                        var screen = screenInfo(e)
+                        this._scroll = screen.scrolly
+                      }
+                    }
+                  
+                    // export
+                    return Factory
+                  })
+                  
+                  new Ribbons({
+                    colorSaturation: '60%',
+                    colorBrightness: '50%',
+                    colorAlpha: 0.5,
+                    colorCycleSpeed: 5,
+                    verticalPosition: 'random',
+                    horizontalSpeed: 200,
+                    ribbonCount: 3,
+                    strokeSize: 0,
+                    parallaxAmount: -0.2,
+                    animateSections: true
+                  })
+            
+            </script>
+   
+              
+{% endblock %}
+        <!--=====================CLIENTS SECTION ==========================-->
+            
+      

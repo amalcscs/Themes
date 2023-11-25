@@ -1,0 +1,428 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - ALTOS THEME</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon.ico' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+  <link href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="#" class="logo d-flex align-items-center">
+        <img src="{% static 'img/favicon.ico' %}" alt="">
+        <span class="d-none d-lg-block">Altos Theme</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        {% csrf_token %}
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">{{user_tmessages_count}}</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have {{user_messages_count}} new messages
+              <a href="{% url 'view_allmessage' %}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            {% for message in user_messages %}
+            <li class="message-item">
+              <a href="{% url 'view_allmessage' %}">
+                <img src="static/img/message.png" alt="" class="rounded-circle">
+                <div>
+                  <h4>{{message.name}}</h4>
+                  <p id="my-paragraph{{message.id}}">{{message.messages}}</p>
+                  <p>{{message.connect_time}}</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            {% endfor %}
+
+
+            <li class="dropdown-footer">
+              <a href="{% url 'view_allmessage' %}">Show all messages</a>
+            </li>
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            {% if admin.u_image %}
+            <img src="{{admin.u_image.url}}" alt="Profile" class="rounded-circle">
+            {% endif %}
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{admin.u_name}}</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{user}}</h6>
+              <span>{{HomePage}}</span>
+            </li>
+           
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'profile' %}">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{% url 'Dashboard' %}">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Categories</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'categorie_load' %}">
+              <i class="bi bi-circle"></i><span>Categories Add</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'categorie_edit' %}">
+              <i class="bi bi-circle"></i><span>Categories Edit</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'categorie_list' %}">
+              <i class="bi bi-circle"></i><span>Categories List</span>
+            </a>
+          </li>
+  
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Templates</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+          <li>
+            <a href="{% url 'template_load' %}">
+              <i class="bi bi-circle"></i><span>Templates Add</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'template_editload' %}">
+              <i class="bi bi-circle"></i><span>Templates Edit</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'template_list' %}">
+              <i class="bi bi-circle"></i><span>Templates List</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'template_file' %}">
+              <i class="bi bi-circle"></i><span>Templates Files</span>
+            </a>
+          </li>
+         
+         
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-stack"></i><span>Clients</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="client-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'client_load' %}">
+              <i class="bi bi-circle"></i><span>Client Add</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'client_list' %}">
+              <i class="bi bi-circle"></i><span>Client List</span>
+            </a>
+          </li>
+         
+          
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#testimonial-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-chat-square-quote"></i><span>Testimonial</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="testimonial-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'testimonial_load' %}">
+              <i class="bi bi-circle"></i><span> Testimonial Add</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'testimonial_list' %}">
+              <i class="bi bi-circle"></i><span>Testimonial List</span>
+            </a>
+          </li>
+          
+          
+        </ul>
+      </li>
+      <!-- End Forms Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+
+    <!-- -----SUCCESS MESSAGE------- -->
+    
+
+
+    {% if success %}
+      <div class="success-login" id="success-Modal" >
+        <div class="success-icon"><i class="bi bi-check-circle"></i></div>
+        <div class="success-body">
+          
+          <div class="success-content">
+            <h6 class="succes-title">Success</h6>
+            <p class="success-paragraph">{{success}}</p>
+          </div>
+        </div>
+        <span class="close"><i class="bi bi-x-circle"></i></span>
+      </div>
+    {% endif %}
+
+
+    
+    <!-- -----END SUCCESS MESSAGE------- -->
+
+
+    <!-- -----DELETE MESSAGE------- -->
+    
+
+
+    {% if danger  %}
+      <div class="danger-login" id="success-Modal" >
+        <div class="danger-icon"><i class="bi bi-exclamation-circle"></i></div>
+        <div class="danger-body">
+          
+          <div class="danger-content">
+            <h6 class="danger-title">Deleted</h6>
+            <p class="danger-paragraph">{{danger}}. </p>
+          </div>
+        </div>
+        <span class="close"><i class="bi bi-x-circle"></i></span>
+      </div>
+    {% endif %}
+
+
+    
+    <!-- -----END DELETE MESSAGE------- -->
+
+    
+    <!-- -----INFORMATION MESSAGE------- -->
+    
+
+
+    {% if info %}
+      <div class="info-login" id="info-Modal" >
+        <div class="info-icon"><i class="bi bi-info-circle"></i></div>
+        <div class="info-body">
+          
+          <div class="info-content">
+            <h6 class="info-title">Information</h6>
+            <p class="info-paragraph">{{info}}  </p>
+          </div>
+        </div>
+        <span class="info-close"><i class="bi bi-x-circle"></i></span>
+      </div>
+    {% endif %}
+
+
+    
+    <!-- -----END INFORMATION MESSAGE------- -->
+
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item "><a href="{% url 'Dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">{{page_name}}</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    {% block content %}
+
+    {% endblock %}
+
+  
+    {% for message in user_messages %}
+    <script>
+      // limitting the content
+      var paragraph = document.getElementById("my-paragraph{{message.id}}");
+      var text = paragraph.innerHTML;
+      
+      if (text.length > 40) {
+        var shortenedText = text.substring(0, 50) + "...";
+        paragraph.innerHTML = shortenedText;
+      }
+    </script>
+    {% endfor %}
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>altostechnologies</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://altostechnologies.com/">altostechnologies</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!--Jquery script-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+   <!-- Data Table -->
+   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+
+   <script>
+    new DataTable('#example');
+   </script>
+ 
+  <script>
+  // Close the  Success modal
+    function closeModal() {
+      var modal = document.getElementById('success-Modal');
+      modal.style.display = 'none';
+    }
+
+    // Close the modal when the close button is clicked
+    var closeBtn = document.getElementsByClassName('close')[0];
+    closeBtn.addEventListener('click', closeModal);
+  </script>
+
+  <script>
+  // Close the  information modal
+  function closeModal() {
+    var modal = document.getElementById('info-Modal');
+    modal.style.display = 'none';
+  }
+
+  // Close the modal when the close button is clicked
+  var closeBtn = document.getElementsByClassName('info-close')[0];
+  closeBtn.addEventListener('click', closeModal);
+</script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

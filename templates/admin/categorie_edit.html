@@ -1,0 +1,257 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    input[type=text],input[type=date],input[type=time],select
+    {
+        width: 100%;
+    }
+    .categorie .section__form
+    {
+        padding: 2rem 0.05rem;
+    }
+    .categorie .form__head
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .form__head h2{
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .form__head button{
+        padding: 0.40rem 4rem;
+        background-color: rgb(134, 46, 156);
+        color: #ffff;
+        font-weight: 700;
+        border-radius:5px;
+        font-size: 0.90rem;
+        letter-spacing: 0.06rem;
+        border: none;
+        outline:none;
+    }
+    .input__section, .date__inputBox
+    {
+        margin-top: 1.5rem;
+    }
+    .input__section .card
+    {
+        padding: 1.5rem 1rem;
+    }
+    .card__head h5{
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.06rem;
+    }
+    .radio__inputBox
+    {
+        margin-top: 1.5rem;
+    }
+    .radio__inputBox input[type=radio]
+    {
+        margin-top: 0.50rem;
+        
+    }
+    .radio__inputBox  span{
+        margin-left: 0.40rem;
+        font-size: 0.80rem;
+        font-weight: 500;
+    }
+    .input__group
+    {
+        margin-top: 1rem;
+    }
+    .input__group label
+    {
+        margin-bottom: 0.40rem;
+        font-weight:600;
+        font-size: 0.88rem;
+    }
+    .input__group input, .input__group select
+    {
+        padding: 0.50rem;
+        font-size: 0.80rem;
+        border: 1px solid #ecebeb;
+    }
+    .input__group input:focus, .input__group select:focus
+    {
+        border: 1px solid #bad2df;
+        outline:1px solid #bad2df ;
+    }
+
+    .categeri__Box .image__Box
+    {
+        width: 100%;
+        height: 300px;
+        border: 1px solid #ecebeb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+    .image__Box img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    @media (max-width:575px)
+    {
+        .form__head
+        {
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form__head h2
+        {
+            font-size: 1.8rem;
+            
+        }
+        .form__head button{
+            width: 100%;
+            margin-top: 0.70rem;
+        }
+    }
+</style>
+
+<section class="section categorie">
+    <div class="container">
+        <form class="section__form" action="{% url 'categeori_edit_save' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form__head">
+                <h2>Categories Edit</h2>
+                <button type="submit">Save</button>
+            </div>
+            <div class="input__section">
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Choose Categorie to edit</h5>
+                    </div>
+                    <div class="input__group">
+                    
+                        <select  name="slect_categori" id="Categori_Select">
+
+                            <option value="0">----/---</option>
+                            {% for categori in categories %}
+                            <option value="{{categori.id}}">{{categori.categorie_name}}</option>
+                            {% endfor %}
+
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Visibility Status</h5>
+                        <div class="radio__inputBox">
+                            <input type="radio" name="visibility_opt" value="1" ><span>Published</span><br>
+                            <input type="radio" name="visibility_opt" value="2"><span>Scheduled</span><br>
+                            <input type="radio" name="visibility_opt" value="0"><span>Hidden</span><br>
+                              
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Publish Schedule</h5>
+                        <div class="date__inputBox">
+                            <div class="input__group">
+                                <label>Publish Date</label>
+                                <input type="date" name="publish_date" id="dateInput">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Categorie</h5>
+                    </div>
+                    <div class="categeri__Box">
+                        <div class="input__group">
+                            <label>Categorie Name</label>
+                            <input type="text" name="categori_name" id="categori_name"required>
+                        </div>
+                        <div class="input__group">
+                            <label>Categorie Image</label>
+                            <input type="file" name="categori_img" id="imageInput" accept="image/png, image/jpeg" >
+                        </div>
+                        <div class="input__group">
+                            <div class="image__Box" id="img_Box">
+                                <img src="{% static 'assets/img/dummy_file.png' %}" id="img_display">
+                            </div>
+                        </div>
+                        <div class="input__group">
+                            <label>Tag</label>
+                            <input type="text" name="tag_name" required id="img_tag">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Categorie Image Preview-->
+<script>
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var imagePreview = document.getElementById('img_display');
+        imagePreview.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    var imageInput = document.getElementById('imageInput');
+    imageInput.addEventListener('change', previewImage);
+ 
+</script>
+
+<!-- Categorie featching -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+  $(document).ready(function() {
+    $('#Categori_Select').change(function() {
+      var selectedValue = $('#Categori_Select').val();
+    
+      $.ajax({
+        url: "{% url 'fetch_categori' %}",
+        data: { value: selectedValue },
+        dataType: 'json',
+        success: function(response) {
+            console.log(response.publish_date)
+          $('#categori_name').val(response.categorie_name); 
+          $('#img_tag').val(response.categorie_tag); 
+          $('#dateInput').val(response.categorie_date);
+          
+          var imageContainer = $('#img_Box');
+          imageContainer.empty();
+          imageContainer.append('<img src="' + response.image + '">');
+          var radioValue = response.radioValue;
+        // Set the checked property of the radio button based on the response value
+            $('input[name="visibility_opt"]').each(function(index) {
+               
+            $(this).prop('checked', $(this).val() == radioValue);
+            });
+        },
+        error: function(xhr, textStatus, error) {
+            // Handle the error response
+            console.log(error);
+          }
+      });
+    });
+  });
+
+ 
+</script>
+
+
+
+
+{% endblock %}

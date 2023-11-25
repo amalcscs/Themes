@@ -1,0 +1,470 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--=============== TITLE AND METE TAGS,DISCRIPTIONS ===============-->
+
+        <title>{{ title }}</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+        <meta name="keywords" content="{{ meta_tags|join:', ' }}">
+        <meta name="description" content="{{ meta_description }}">
+
+        <!--=============== REMIXICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        
+       <!--========= Google Fonts Link For Icons ========== -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+        <link rel="stylesheet" href="{% static 'assets/vendor/boxicons/css/boxicons.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}">
+
+        <!--================ AOS ======================-->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+        <!--=============== PARALAX ==================-->
+        <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+       
+
+        <title>Altos Themes</title>
+    </head>
+
+    <body>
+
+        <!--=============== CHAT BOT ===============-->
+        <button class="chatbot-toggler">
+            <span class="material-symbols-rounded">mode_comment</span>
+            <span class="material-symbols-outlined">close</span>
+        </button>
+
+          <div class="chatbot">
+            <header>
+              <h2>Chatbot</h2>
+              <span class="close-btn material-symbols-outlined">close</span>
+            </header>
+            <ul class="chatbox">
+              <li class="chat incoming">
+                <span class="material-symbols-outlined">smart_toy</span>
+                <p>Hi there 👋<br>How can I help you today?</p>
+              </li>
+            </ul>
+            <div class="chat-input">
+              <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+              <span id="send-btn" class="material-symbols-rounded">send</span>
+            </div>
+          </div>
+       
+
+       
+        <!--=============== HEADER ===============-->
+        <header class="header">
+            <nav class="nav container-fluid" id="navbar">
+                <div class="nav__data">
+                    <a href="#" class="nav__logo">
+                        <img src="{% static 'img/favicon.ico' %}" class="logo__img" alt="logo"></i> ALTOS Theme Hub
+                    </a>
+                    <div class="nav__toggle">
+                        <i class="ri-shopping-bag-2-fill nav__toggle-menu"></i>
+                       
+                    </div>
+                   
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-menu-line nav__toggle-menu"></i>
+                        <i class="ri-close-line nav__toggle-close"></i>
+                    </div>
+                </div>
+
+                <!--=============== NAV MENU ===============-->
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li>
+                            <a href="{% url 'HomePage' %}" class="nav__link">ALTOS</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ProductPage' %}" class="nav__link">Services</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'categoryPage' %}" class="nav__link">Categeory</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'PricingPage' %}" class="nav__link">Plan & Pricing</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'AboutPage' %}" class="nav__link">About</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'ContactPage' %}" class="nav__link">Contact</a>
+                        </li>
+                        <li>
+                              
+                            <!--<a href="{% url 'BlogPage' %}" class="nav__link">-->
+                            <a href="{% url 'ContactPage' %}" class="nav__link">
+                                <i class="ri-shopping-cart-fill"></i>
+                            </a>
+
+                        </li>
+                       
+                        
+                    </ul>
+                    
+                </div>
+                
+
+            </nav>
+        </header>
+
+
+        <!--==================== MAIN ====================-->
+        <main class="main">
+            
+            {% block content %}
+
+            {% endblock %}
+
+        </main>
+
+        <!--==================== FOOTER ====================-->
+        <footer class="footer section">
+            <div class="footer__container container grid">
+                <div class="footer__content">
+                    <h3 class="footer__title">ALTOS EDUHUB</h3>
+
+                    <ul class="footer__list">
+                        <li> 1st Floor - Thapasya Building Infopark</li>
+                        <li>Kakkanad, Cochin</li>
+                        <li> +91 974 663 2202</li>
+                        <li> info@altosthemes.com</li>
+                    </ul>
+                </div>
+                <div class="footer__content">
+                    <h3 class="footer__title">Quick Link</h3>
+
+                    <ul class="footer__links">
+                    
+                        <li>
+                            <a href="#" class="footer__link">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">Contact</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a href="#" class="footer__link">FAQs & Help</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Social</h3>
+
+                    <ul class="footer__social">
+                        <a href="https://www.facebook.com/people/ALTOS-Technologies/100084886970426/" target="_blank" class="footer__social-link">
+                            <i class="ri-facebook-circle-fill"></i>
+                        </a>
+                        <a href="https://wa.me/919074156818" target="_blank" class="footer__social-link">
+                            <i class="ri-whatsapp-fill"></i>
+                        </a>
+                    
+                        <a href="https://www.youtube.com/@altostechnologies" target="_blank" class="footer__social-link">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+
+                        <a href="https://www.linkedin.com/mwlite/company/altos-technologies-kochi" target="_blank" class="footer__social-link">
+                            <i class="ri-linkedin-box-fill"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/altos_technologies/" target="_blank" class="footer__social-link">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                    </ul>
+                    <div class="subscribe">
+                        <h3 class="subscrib__title">Subscribe To Our NewsLetter</h3>
+                        <form action="#" method="post" class="subscribe__form">
+                            {% csrf_token %}
+                            <input type="email" class="scbscribe__input" name="#" placeholder="Enter your email" >
+                            <button type="submit" class="scbscribe__button">SIGNUP</button>
+                        </form>
+                    
+                    </div>
+
+                </div>
+            </div>
+
+            <span class="footer__copy">{% now "Y" %} &#169; AltosTechnologies. All rigths reserved</span>
+        </footer>
+
+
+        <!--=============== SCROLL UP ===============-->
+        <!-- <a href="#" class="scrollup" id="scroll-up"> 
+            <i class="ri-arrow-up-line scrollup__icon"></i>
+        
+        </a> -->
+        <a href="https://wa.me/919074156818" class="scrollwh" id="scroll-wh"> 
+        
+            <i class="ri-whatsapp-fill scrollwh__icon"></i>
+        </a>
+
+        <!--=============== MAIN JS ===============-->
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <!--=============== CHAT JS ===============-->
+         <script src="{% static 'js/chat.js' %}"></script>
+
+        <!--=============== CHAT JS ===============-->
+        <script src="{% static 'js/slider.js' %}"></script>
+
+        <!--================== AOS JS ===================-->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+     
+        
+
+      
+        <script>
+            AOS.init();
+        </script>  
+  
+        <script>
+            (function() {
+    
+                var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+            
+                // Main
+                initHeader();
+                initAnimation();
+                addListeners();
+            
+                function initHeader() {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    target = {x: width/2, y: height/2};
+            
+                    largeHeader = document.getElementById('large-header');
+                    largeHeader.style.height = height+'px';
+            
+                    canvas = document.getElementById('demo-canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx = canvas.getContext('2d');
+            
+                    // create points
+                    points = [];
+                    for(var x = 0; x < width; x = x + width/20) {
+                        for(var y = 0; y < height; y = y + height/20) {
+                            var px = x + Math.random()*width/20;
+                            var py = y + Math.random()*height/20;
+                            var p = {x: px, originX: px, y: py, originY: py };
+                            points.push(p);
+                        }
+                    }
+            
+                    // for each point find the 5 closest points
+                    for(var i = 0; i < points.length; i++) {
+                        var closest = [];
+                        var p1 = points[i];
+                        for(var j = 0; j < points.length; j++) {
+                            var p2 = points[j]
+                            if(!(p1 == p2)) {
+                                var placed = false;
+                                for(var k = 0; k < 5; k++) {
+                                    if(!placed) {
+                                        if(closest[k] == undefined) {
+                                            closest[k] = p2;
+                                            placed = true;
+                                        }
+                                    }
+                                }
+            
+                                for(var k = 0; k < 5; k++) {
+                                    if(!placed) {
+                                        if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                                            closest[k] = p2;
+                                            placed = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        p1.closest = closest;
+                    }
+            
+                    // assign a circle to each point
+                    for(var i in points) {
+                        var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
+                        points[i].circle = c;
+                    }
+                }
+            
+                // Event handling
+                function addListeners() {
+                    if(!('ontouchstart' in window)) {
+                        window.addEventListener('mousemove', mouseMove);
+                    }
+                    window.addEventListener('scroll', scrollCheck);
+                    window.addEventListener('resize', resize);
+                }
+            
+                function mouseMove(e) {
+                    var posx = posy = 0;
+                    if (e.pageX || e.pageY) {
+                        posx = e.pageX;
+                        posy = e.pageY;
+                    }
+                    else if (e.clientX || e.clientY)    {
+                        posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+                        posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+                    }
+                    target.x = posx;
+                    target.y = posy;
+                }
+            
+                function scrollCheck() {
+                    if(document.body.scrollTop > height) animateHeader = false;
+                    else animateHeader = true;
+                }
+            
+                function resize() {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    largeHeader.style.height = height+'px';
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+            
+                // animation
+                function initAnimation() {
+                    animate();
+                    for(var i in points) {
+                        shiftPoint(points[i]);
+                    }
+                }
+            
+                function animate() {
+                    if(animateHeader) {
+                        ctx.clearRect(0,0,width,height);
+                        for(var i in points) {
+                            // detect points in range
+                            if(Math.abs(getDistance(target, points[i])) < 4000) {
+                                points[i].active = 0.3;
+                                points[i].circle.active = 0.6;
+                            } else if(Math.abs(getDistance(target, points[i])) < 20000) {
+                                points[i].active = 0.1;
+                                points[i].circle.active = 0.3;
+                            } else if(Math.abs(getDistance(target, points[i])) < 40000) {
+                                points[i].active = 0.02;
+                                points[i].circle.active = 0.1;
+                            } else {
+                                points[i].active = 0;
+                                points[i].circle.active = 0;
+                            }
+            
+                            drawLines(points[i]);
+                            points[i].circle.draw();
+                        }
+                    }
+                    requestAnimationFrame(animate);
+                }
+            
+                function shiftPoint(p) {
+                    TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
+                        y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
+                        onComplete: function() {
+                            shiftPoint(p);
+                        }});
+                }
+            
+                // Canvas manipulation
+                function drawLines(p) {
+                    if(!p.active) return;
+                    for(var i in p.closest) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p.closest[i].x, p.closest[i].y);
+                        ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
+                        ctx.stroke();
+                    }
+                }
+            
+                function Circle(pos,rad,color) {
+                    var _this = this;
+            
+                    // constructor
+                    (function() {
+                        _this.pos = pos || null;
+                        _this.radius = rad || null;
+                        _this.color = color || null;
+                    })();
+            
+                    this.draw = function() {
+                        if(!_this.active) return;
+                        ctx.beginPath();
+                        ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+                        ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
+                        ctx.fill();
+                    };
+                }
+            
+                // Util
+                function getDistance(p1, p2) {
+                    return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+                }
+                
+            })();
+         </script>
+         <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+       ></script>
+        {%if messages%} {%for message in messages%} {%if message.tags == "success"%}
+        <script>
+        swal({
+            position: "top-end",
+            icon: "success",
+            title: "{{message}}",
+        });
+        </script>
+        {%elif message.tags == "warning"%}
+        <script>
+        swal({
+            position: "top-end",
+            icon: "warning",
+            title: "{{message}}",
+        });
+        </script>
+        {%elif message.tags == "error"%}
+        <script>
+        swal({
+            position: "top-end",
+            icon: "error",
+            title: "{{message}}",
+        });
+        </script>
+        {%else%}
+        <script>
+        swal({
+            position: "top-end",
+            icon: "info",
+            title: "{{message}}",
+        });
+        </script>
+        {%endif%} {%endfor%} {%endif%}
+    </body>
+</html>

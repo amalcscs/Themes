@@ -1,0 +1,1 @@
+from EduhubTheme.wsgi import application

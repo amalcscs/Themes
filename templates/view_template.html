@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+body{
+    background-image: linear-gradient(0deg, rgba(29, 31, 32, 0.974), rgba(16, 26, 32, 0.974)), url('static/img/template_pagebg.jpg'); 
+    background-size:100%;
+    background-position:100%;
+}
+.gt-tmp-btn{
+    padding: 0.55rem 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.5rem auto;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: #3e95b7;
+    cursor: pointer;
+}
+.gt-tmp-btn:hover{
+    background: #2a7a99;
+}
+.tmp-dts{
+    margin: 1rem auto;
+}
+.tmp-bnft ul{
+  line-height: 1.7rem;
+}
+.tmp-bnft ul li{
+    padding-bottom: 0.3rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    color: #cfcfcfad;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.8rem;
+}
+.tmp-bnft .ri-check-line {
+  color: #ffae0d;
+  font-weight: 600;
+}
+.sell-price .template-price {
+    font-size: 1.8rem;
+}
+.price-icon {
+    font-size: 1.2rem;
+}
+</style>
+
+<!-- ================= TEMPLATE PAGE SECTION===============-->
+
+<section class="templateView_section section">
+    <div class="templateView__container container-fluid grid">
+        <div class="contentBox">
+            <h1>{{template.template_name}}</h1>
+            <p>
+                {{template.template_discription}}
+            </p>
+            <span><p>Category :<a href="{% url 'HomePage' %}">Home</a> | {{template.categori_id.categorie_name}}</p></span>
+            
+            <div class="video__Box" >
+                <video id="video_display" src="{{template.video_file.url}}"  controls></video>
+            </div>
+        </div>
+        <div class="rightBox">
+
+            <!-- <form action="#">
+                {% csrf_token %}
+            </form> -->
+            <div class="tmp-price">
+                <div class="sell-price"><span class="template-price"><i class='bx bx-rupee price-icon'></i>{{template.template_price}}</span></div>
+                <div class="og-price"><span><i class='bx bx-rupee'></i><strike>5999</strike></span></div>
+            </div>
+            <div class="tmp-bnft" style="margin-top: 1rem;">
+                <ul>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        <span>Quality Checked</span>
+                    </li>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        <span>Future Updates</span>
+                    </li>
+                    <li>
+                        <i class="ri-check-line"></i>
+                        <span>6 Months support</span>
+                    </li>
+                </ul>
+            </div>
+            <a href="{% url 'ContactPage' %}">
+            <div class="cart-btn">
+                <button class="gt-tmp-btn"><span> <i class='bx bx-cart'></i></span> Get This Template</button>
+            </div>
+            </a>
+            <hr>
+            <div class="dt-published tmp-dts">
+                <p>Date Published : <span style="float: right;">{{template.template_publish_date}}</span></p>
+            </div>
+            <div class="lst-updt tmp-dts">
+                <p>Last Updated : <span style="float: right;">{{template.template_publish_date}}</span></p>
+            </div>
+            <div class="layout tmp-dts">
+                <p>Layout : <span style="float: right;">Responsive</span></p>
+            </div>
+            <div class="hres tmp-dts">
+                <p>High Resolution : <span style="float: right;">Yes</span></p>
+            </div>
+            <div class="doc tmp-dts">
+                <p>Documentation : <span style="float: right;">Well Documented</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--================ TEMPLATE LIST SECTION ================-->
+<section class="category_Tempsection section">
+    <div class="categoryBox container-fluid">
+        <div class="wrapper">
+            <h1 class="section-header">TEMPLATES</h1>
+            <P class="section-paragraph">Choose from 10,000+ awesome, mobile-friendly website templates for every kind of websites and blocks.
+            </P>
+            <div class="templateslist__Box">
+              {% for temp in templates %}
+              <div class="template">
+                <div class="tmp-body">
+                  <a href="{% url 'TemplateView' temp.id %}" class="temp__card sub-image-card">
+                
+                      {% if temp.template_image %}
+                      <img src="{{temp.template_image.url}}" alt="{{temp.template_img_alttag}}">
+                      {% endif %}
+                      {% if temp.template_code %}
+                      <p style="color: aliceblue; margin-bottom:0.40rem;"> Code : {{temp.template_code}}</p>
+                      {% endif %}
+                  </a>
+                </div>
+                <div class="tmp-price"><span><i class='bx bx-rupee'></i><strike>5999</strike></span><span class="template-price"><i class='bx bx-rupee price-icon'></i>{{temp.template_price}}</span></div>
+                <p>Last Updated: {{temp.template_publish_date}}</p>
+                <div class="footer-buttons grid">
+                 <a href="{% url 'ContactPage' %}"> <button class="tmp-cart-button lg" style="width:120px;"> <i class='bx bx-cart' ></i></button></a>
+                  <button class="tmp-lp-button" onclick="window.location.href=`{% url 'TemplateView' temp.id %}`">Live Preview</button>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+      
+        </div>
+        
+    </div>
+</section>
+
+
+{% endblock %}

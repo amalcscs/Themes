@@ -1,0 +1,299 @@
+{% extends 'admin/index.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    select
+    {
+        width: 100%;
+    }
+    .bi-star-fill
+    {
+        color: #f6de0a;
+        font-size: 1rem;
+    }
+   
+    .template .section__form
+    {
+        padding: 2rem 0.05rem;
+    }
+    .template .form__head
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .form__head h2{
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .form__head button{
+        padding: 0.40rem 4rem;
+        background-color: rgb(134, 46, 156);
+        color: #ffff;
+        font-weight: 700;
+        border-radius:5px;
+        font-size: 0.90rem;
+        letter-spacing: 0.06rem;
+        border: none;
+        outline:none;
+    }
+    .input__section
+    {
+        margin-top: 1.5rem;
+    }
+    .input__section .card
+    {
+        padding: 1.5rem 1rem;
+    }
+    .card__head h5{
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.06rem;
+    }
+    
+    .input__group
+    {
+        margin-top: 1rem;
+    }
+    .input__group label
+    {
+        margin-bottom: 0.40rem;
+        font-weight:600;
+        font-size: 0.88rem;
+    }
+     .input__group select
+    {
+        padding: 0.50rem;
+        font-size: 0.80rem;
+        border: 1px solid #ecebeb;
+    }
+    .video__Box
+    {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        border: 1px solid #ecebeb;
+    }
+    #video_display
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+  
+    .input__group select:focus
+    {
+        border: 1px solid #bad2df;
+        outline:1px solid #bad2df ;
+    }
+    .input__group input::placeholder
+    {
+        font-size: 0.80rem;
+    }
+    
+    @media (max-width:575px)
+    {
+        .form__head
+        {
+            flex-direction: column;
+            justify-content: center;
+        }
+        .form__head h2
+        {
+            font-size: 1.8rem;
+            
+        }
+        .form__head button{
+            width: 100%;
+            margin-top: 0.70rem;
+        }
+    }
+    .template__head
+    {
+        margin-bottom: 1rem;
+    }
+    .template__head h2
+    {
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+    .code_temp
+    {
+        font-size: 0.80rem;
+        font-weight: 600;
+        padding-left: 1rem;
+    
+    }
+    .code_temp span{
+        font-weight: 900;
+        font-size: 0.875rem;
+    }
+</style>
+
+
+<section class="template section">
+    <div class="container">
+        <form class="section__form" action="{% url 'fetch_templates_list' %}" method="post">
+            {% csrf_token %}
+            <div class="form__head">
+                <h2>Template List</h2>
+                <button type="submit" id="">Show</button>
+            </div>
+            <div class="input__section">
+                <div class="card">
+                    <div class="card__head">
+                        <h5>Pick your Categorie </h5>
+                    </div>
+                    <div class="input__group">
+                    
+                        <select  name="slect_categori" id="Categori_Select">
+    
+                            <option value="0">----/---</option>
+                            {% for categori in categories %}
+                            <option value="{{categori.id}}">{{categori.categorie_name}}</option>
+                            {% endfor %}
+    
+                        </select>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ==============Template List=========-->
+<section>
+    <div class="container">
+        <div class="template__head">
+            <h2>Templates </h2>
+        </div>
+        <div class="template__list">
+            <div class="row g-4">
+            {% for template in templates %}
+                <div class="col-md-4 col-lg-4 col-sm-12 card-visibility">
+                   
+                    <div class="card template__box mb-3 " >
+                        
+                        {% if template.template_image %}
+                        <div class="image__Box" data-bs-toggle="modal" data-bs-target="#template-details{{template.id}}">
+                            <img src="{{template.template_image.url}}" class="img-fluid rounded-start" alt="{{template.template_img_alttag}}">
+                        </div>
+                        <p class="code_temp">Template Code : <span>{{template.template_code}}</span></p>
+                    
+                        {% endif %}
+                        
+                        
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<style>
+    .modal-header
+    {
+        border: none;
+    }
+    .modal-title
+    {
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06rem;
+    }
+    .details
+    {
+        padding: 0.50rem 1rem;
+    }
+    .card-text
+    {
+        font-size: 0.90rem;
+        color: #4a4949;
+    }
+    .bi-star-fill
+    {
+        color: #f6de0a;
+        font-size: 0.85rem;
+    }
+</style>
+  
+  <!-- Template Modal -->
+  {% for template in templates %}
+  <div class="modal  fade" id="template-details{{template.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content card">
+        <div class="modal-header">
+          <h1 class="modal-title" id="#">Template details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+            <div class="video__Box">
+            {% if template.video_file %}
+                   
+                <video src="{{template.video_file.url}}" id="video_display" controls></video>
+            
+            {% endif %}
+            </div>
+            <div class="card details">
+                <h5 class="card-title">{{template.template_name}}</h5>
+                <p class="card-text">{{template.template_discription}}</p>
+                <p class="card-text">Price : Rs {{template.template_price}} /-</p>
+                <span class="card-text">
+                  {% if template.template_rating == '5' %}
+                  <span>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                  </span>
+                  {% elif template.template_rating == '4' %}
+                  <span>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                      
+                  </span>
+                  {% elif template.template_rating == '3' %}
+                  <span>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                      
+                      
+                  </span>
+                  {% elif template.template_rating == '2' %}
+                  <span>
+                       <i class="bi bi-star-fill"></i>
+                       <i class="bi bi-star-fill"></i>
+                      
+                  </span>
+                  {% elif template.template_rating == '1' %}
+                  <span>
+                       <i class="bi bi-star-fill"></i>
+                      
+                  </span>
+                  {% endif %}
+                </span>
+                <span class="card-text">{{template.template_publish_date}}</span>
+            </div>
+           
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}
